@@ -403,7 +403,23 @@ en:
       reject: Reject
     register:
       ## about_ca
-      
+      about_grid: "The Scientific Computing Center of AUTh is responsible for the management and the operation of the <strong>national Certification Authority Hellasgrid</strong> inside the framework of the National Grid Initiative that is coordinated by GRNET S.A."
+      about_hg: "The operation of the CA started in 2002 with the goal of serving the Greek user base for the Grid Infrastructure. From then on, it constitutes the the national Certification Authority, being acknowledged by the <strong>International Grid Trust Federation(IGFT)</strong> and, as a result, the certificates it publishes are acknowledged by all international research computing infrastructures that support the"
+      about_ras: "For the best service of Greek users, a network of <strong>Registration Authorities</strong> in Academic Insitutions and Institutes has been established."
+      can_locate: You can locate
+      in_map: in the map
+      serving_ra: the Registration Authority that serves you
+      catch_all_cas_no_ra: "In case there is no RA where the user is working, the user can be served by the catch-all Certification Authority, which are the following"
+      grnet: "GRnet S.A. (Athens)"
+      auth: "AUTh (Thessaloniki)"
+      cti_ceid: "CTI-CEID (Patra)"
+      forth: "FORTH (Crete)"
+      ra: Registration Authority
+      city: City
+      supervisor: Supervisor
+      manager: Manager
+      address: Address
+      tel: Telephone
       ## add_new_person
       successful_registration: Successful registration of your contact details
       confirm_address: "In order to proceed with the process of issuing a certificate, it is necessary that the contact capabilities with you be verified, in the e-mail you declared."
