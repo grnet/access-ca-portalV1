@@ -72,7 +72,11 @@
           </tr>
           <tr>
             <th><%=I18n.t "views.host.organization"%></th>
-            <td style="padding: 5px;"><%= @host.organization.name_el %></td>
+            <%if params[:locale] == 'el'%>
+              <td style="padding: 5px;"><%= @host.organization.name_el %></td>
+            <%else%>
+              <td style="padding: 5px;"><%= @host.organization.name_en %></td>
+            <%end%>
           </tr>
           <tr>
             <% if @host.admin_id == Person.find_by_dn(session[:usercert]).id %>

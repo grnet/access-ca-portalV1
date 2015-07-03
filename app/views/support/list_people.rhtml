@@ -27,7 +27,11 @@
   			<tr class="<%= row_class %>">
     			<td><%= person.first_name_en %> <%= person.last_name_en %></td>
     			<td><%= person.email %></td>
+    			<%if params[:locale] == 'el'%>
 				  <td><%= if person.organization; person.organization.name_el; else "N/A"; end  %></td>
+				<%else%>
+					<td><%= if person.organization; person.organization.name_en || person.organization.name_el; else "N/A"; end  %></td>
+				<%end%>
 				  <td><%= person.position %></td>
 				  <td><%= person.created_at.mday %>/<%= person.created_at.month %>/<%= person.created_at.year %></td>
 				  <td><%= person.updated_at.mday %>/<%= person.updated_at.month %>/<%= person.updated_at.year %></td>

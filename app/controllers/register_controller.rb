@@ -17,7 +17,11 @@ class RegisterController < ApplicationController
   # gia na doulepsei h truncate
   def registration_form
     @action_title = "#{I18n.t "controllers.register.user_registration_form"}"
-    @organizations = Organization.find(:all,:order => "name_el ASC").map {|o| [truncate(o.name_el, 40), o.id]}
+    if params[:locale] == "el"
+      @organizations = Organization.find(:all,:order => "name_el ASC").map {|o| [truncate(o.name_el, 40), o.id]}
+    else
+      @organizations = Organization.find(:all,:order => "name_en ASC").map {|o| [truncate(o.name_en, 40) || truncate(o.name_el, 40), o.id]}
+    end
     @scientific_fields = ScientificField.find(:all).map {|o| [truncate(o.description, 40), o.id]}
   end
   
@@ -52,7 +56,11 @@ class RegisterController < ApplicationController
       # render(:text => "<pre>" + email.encoded + "</pre>")
       # redirect_to :action => "csr_form"
     else
-      @organizations = Organization.find(:all).map {|o| [truncate(o.name_el, 40), o.id]}
+      if params[:locale] == "el"
+      @organizations = Organization.find(:all,:order => "name_el ASC").map {|o| [truncate(o.name_el, 40), o.id]}
+      else
+        @organizations = Organization.find(:all,:order => "name_en ASC").map {|o| [truncate(o.name_en, 40) || truncate(o.name_el, 40), o.id]}
+      end
       @scientific_fields = ScientificField.find(:all).map {|o| [truncate(o.description, 40), o.id]}
       render :action => "registration_form"
     end

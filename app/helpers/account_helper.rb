@@ -14,12 +14,28 @@ module AccountHelper
       else
         result += "<td>" + @fqdn + "</td>"
 	  end
-      result += "<td>" + csr.organization.name_el + "</td>"
+      if params[:locale] == 'el'
+        result += "<td>" + csr.organization.name_el + "</td>"
+      else
+        if !csr.organization.name_en.nil?
+          result += "<td>" + csr.organization.name_en + "</td>"
+        else
+          result += "<td>" + csr.organization.name_el + "</td>"
+        end
+      end
     else
       result += "<td>" + link_to("CSR_" + csr.organization.domain.upcase + "_" + CertificateRequest.find_by_uniqueid(csr.uniqueid).id.to_s, :controller => 'cert', :action => 'show_request_details', :id => CertificateRequest.find_by_uniqueid(csr.uniqueid).id)+ "</td>"
       result += "<td>Person</td>"
       result += "<td>" + link_to(csr.owner.email, :action => 'show_person_details', :id => csr.owner.id) + "</td>"
-      result += "<td>" + csr.organization.name_el + "</td>"
+      if params[:locale] == 'el'
+        result += "<td>" + csr.organization.name_el + "</td>"
+      else
+        if !csr.organization.name_en.nil?
+          result += "<td>" + csr.organization.name_en + "</td>"
+        else
+          result += "<td>" + csr.organization.name_el + "</td>"
+        end
+      end
     end
     result += "<td>" + csr.created_at.mday.to_s + "/" +  csr.created_at.month.to_s + "/" + csr.created_at.year.to_s + "</td>"
     result += "<td>" + csr.status + "</td>"

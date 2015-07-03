@@ -19,7 +19,15 @@ module CaHelper
       result += "<td>" + link_to("CSR_" + csr.owner.organization.domain.upcase + "_" + csr.id.to_s, :action => 'show_request_details', :id => csr.id)+ "</td>"
       result += "<td>Person</td>"
       result += "<td>" + link_to(csr.owner.email, :action => 'show_person_details', :id => csr.owner.id) + "</td>"
-      result += "<td>" + csr.owner.organization.name_el + "</td>"
+      if params[:locale] == 'el'
+        result += "<td>" + csr.organization.name_el + "</td>"
+      else
+        if !csr.organization.name_en.nil?
+          result += "<td>" + csr.organization.name_en + "</td>"
+        else
+          result += "<td>" + csr.organization.name_el + "</td>"
+        end
+      end
     end
     result += "<td>" + csr.created_at.mday.to_s + "/" +  csr.created_at.month.to_s + "/" + csr.created_at.year.to_s + "</td>"
     result += "</tr>"
@@ -37,7 +45,15 @@ module CaHelper
       person = csr.owner
       result += "<td>CSR_" + person.organization.domain.upcase + "_" + csr.id.to_s + "</td>"
       result += "<td>" + link_to(person.email, :action => 'show_person_details', :id => person) + "</td>"
-      result += "<td>" + person.organization.name_el + "</td>"
+      if params[:locale] == 'el'
+        result += "<td>" + person.organization.name_el + "</td>"
+      else
+        if !person.organization.name_en.nil?
+          result += "<td>" + person.organization.name_en + "</td>"
+        else
+          result += "<td>" + person.organization.name_el + "</td>"
+        end
+      end
     else
       result += "<td>CSR_" + Organization.find_by_fulldomain(@fqdn).domain.upcase + "_" + csr.id.to_s + "</td>"
       if csr.owner_id != 0

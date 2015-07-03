@@ -46,7 +46,7 @@
 		</tr>
 		<tr>
 			<td><label for="person_organization_id"><%=I18n.t "views.register.organization"%></label></td>
-			<td height="40"><%= select(:person, :organization_id, @organizations, {:include_blank => false}, {:class => "textbox"})%></td>
+			<td height="40"><%= select(:person, :organization_id, @organizations.map {|o| o unless o == ''}, {:include_blank => false}, {:class => "textbox"})%></td>
 		</tr>
 		<tr>
 			<td><label for="person_work_phone"><%=I18n.t "views.register.work_tel"%></label></td>

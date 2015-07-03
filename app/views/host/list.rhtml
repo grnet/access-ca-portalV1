@@ -28,7 +28,11 @@
           <% row_class = i%2 == 0 ? "even" : "odd" %> 
           <tr class="<%= row_class %>">
             <td><%= host.fqdn %> </td>
-            <td><%= host.organization.name_el %></td>
+            <%if params[:locale]=='el'%>
+              <td><%= host.organization.name_el %></td>
+            <%else%>
+              <td><%= host.organization.name_en %></td>
+            <%end%>
             <td><%= host.created_at.mday %>/<%= host.created_at.month %>/<%= host.created_at.year %></td>
             <%host_obj = Host.find_by_fqdn(host.fqdn)%>
             <% if host_obj.certificate
