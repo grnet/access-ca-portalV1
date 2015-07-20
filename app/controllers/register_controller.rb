@@ -19,10 +19,11 @@ class RegisterController < ApplicationController
     @action_title = "#{I18n.t "controllers.register.user_registration_form"}"
     if params[:locale] == "el"
       @organizations = Organization.find(:all,:order => "name_el ASC").map {|o| [truncate(o.name_el, 40), o.id]}
+      @scientific_fields = ScientificField.find(:all).map {|o| [truncate(o.description_el, 40), o.id]}
     else
       @organizations = Organization.find(:all,:order => "name_en ASC").map {|o| [truncate(o.name_en, 40) || truncate(o.name_el, 40), o.id]}
+      @scientific_fields = ScientificField.find(:all).map {|o| [truncate(o.description_en, 40), o.id]}
     end
-    @scientific_fields = ScientificField.find(:all).map {|o| [truncate(o.description, 40), o.id]}
   end
   
   # Pros8etei enan kainourgio xrhsth sthn database. An uparxei
@@ -57,11 +58,12 @@ class RegisterController < ApplicationController
       # redirect_to :action => "csr_form"
     else
       if params[:locale] == "el"
-      @organizations = Organization.find(:all,:order => "name_el ASC").map {|o| [truncate(o.name_el, 40), o.id]}
+        @organizations = Organization.find(:all,:order => "name_el ASC").map {|o| [truncate(o.name_el, 40), o.id]}
+        @scientific_fields = ScientificField.find(:all).map {|o| [truncate(o.description_el, 40), o.id]}
       else
         @organizations = Organization.find(:all,:order => "name_en ASC").map {|o| [truncate(o.name_en, 40) || truncate(o.name_el, 40), o.id]}
+        @scientific_fields = ScientificField.find(:all).map {|o| [truncate(o.description_en, 40), o.id]}
       end
-      @scientific_fields = ScientificField.find(:all).map {|o| [truncate(o.description, 40), o.id]}
       render :action => "registration_form"
     end
   end
