@@ -11,17 +11,7 @@
 <% end %>
 
 <% if params[:controller] == 'register' && (params[:action] == 'registration_form' || params[:action] == 'add_new_person')    %>
-  <%= javascript_include_tag 'closure-library/closure/goog/base.js' %>
-  <script>
-      goog.require('goog.proto2.Message');
-  </script>
-
-  <%= javascript_include_tag 'libphonenumbers/phonemetadata.pb.js' %>
-  <%= javascript_include_tag 'libphonenumbers/phonenumber.pb.js' %>
-  <%= javascript_include_tag 'libphonenumbers/metadata.js' %>
-  <%= javascript_include_tag 'libphonenumbers/phonenumberutil.js' %>
-  <%= javascript_include_tag 'libphonenumbers/asyoutypeformatter.js' %>
-  <%= javascript_include_tag 'libphonenumbers/phonecheck.js' %>
+  <%= javascript_include_tag 'libphonenumbers.js'%>
 
   <% if params[:action] == 'add_new_person' %>
     <body onload="phoneNumberParser()">
