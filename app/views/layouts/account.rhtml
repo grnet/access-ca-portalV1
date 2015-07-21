@@ -6,6 +6,27 @@
 <%= stylesheet_link_tag 'style' %>
 <%= stylesheet_link_tag 'main' %>
 <%= stylesheet_link_tag 'page' %>
+
+<% if params[:controller] == 'account' && (params[:action] == 'edit_personal_information' || params[:action] == 'update_personal_information')    %>
+  <%= javascript_include_tag 'closure-library/closure/goog/base.js' %>
+  <script>
+      goog.require('goog.proto2.Message');
+  </script>
+
+  <%= javascript_include_tag 'libphonenumbers/phonemetadata.pb.js' %>
+  <%= javascript_include_tag 'libphonenumbers/phonenumber.pb.js' %>
+  <%= javascript_include_tag 'libphonenumbers/metadata.js' %>
+  <%= javascript_include_tag 'libphonenumbers/phonenumberutil.js' %>
+  <%= javascript_include_tag 'libphonenumbers/asyoutypeformatter.js' %>
+  <%= javascript_include_tag 'libphonenumbers/phonecheck.js' %>
+
+  <% if params[:action] == 'update_personal_information' %>
+    <body onload="phoneNumberParser()">
+  <% end %>
+
+<%end%>
+
+
 <% if params[:action] == "iexplorer_vista_csr" %>
 <%= javascript_include_tag 'ieVistaCSR.vbs' %>
 <% end %>
