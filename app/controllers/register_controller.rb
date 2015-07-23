@@ -17,13 +17,8 @@ class RegisterController < ApplicationController
   # gia na doulepsei h truncate
   def registration_form
     @action_title = "#{I18n.t "controllers.register.user_registration_form"}"
-    if params[:locale] == "el"
-      @organizations = Organization.find(:all,:order => "name_el ASC").map {|o| [truncate(o.name_el, 40), o.id]}
-      @scientific_fields = ScientificField.find(:all).map {|o| [truncate(o.description_el, 40), o.id]}
-    else
-      @organizations = Organization.find(:all,:order => "name_en ASC").map {|o| [truncate(o.name_en, 40) || truncate(o.name_el, 40), o.id]}
-      @scientific_fields = ScientificField.find(:all).map {|o| [truncate(o.description_en, 40), o.id]}
-    end
+    @organizations = Organization.find(:all,:order => "name_#{params[:locale]} ASC").map {|o| [truncate(o.send("name_#{params[:locale]}"), 40), o.id]}
+    @scientific_fields = ScientificField.find(:all).map {|o| [truncate(o.send("description_#{params[:locale]}"), 40), o.id]}
   end
   
   # Pros8etei enan kainourgio xrhsth sthn database. An uparxei
@@ -57,13 +52,8 @@ class RegisterController < ApplicationController
       # render(:text => "<pre>" + email.encoded + "</pre>")
       # redirect_to :action => "csr_form"
     else
-      if params[:locale] == "el"
-        @organizations = Organization.find(:all,:order => "name_el ASC").map {|o| [truncate(o.name_el, 40), o.id]}
-        @scientific_fields = ScientificField.find(:all).map {|o| [truncate(o.description_el, 40), o.id]}
-      else
-        @organizations = Organization.find(:all,:order => "name_en ASC").map {|o| [truncate(o.name_en, 40) || truncate(o.name_el, 40), o.id]}
-        @scientific_fields = ScientificField.find(:all).map {|o| [truncate(o.description_en, 40), o.id]}
-      end
+      @organizations = Organization.find(:all,:order => "name_#{params[:locale]} ASC").map {|o| [truncate(o.send("name_#{params[:locale]}"), 40), o.id]}
+      @scientific_fields = ScientificField.find(:all).map {|o| [truncate(o.send("description_#{params[:locale]}"), 40), o.id]}
       render :action => "registration_form"
     end
   end
