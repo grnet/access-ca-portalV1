@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 ENV['RAILS_ENV'] = 'production'
-require "/var/www/access.hellasgrid.gr/current/config/environment"
+require "./config/environment"
 
 organizations = "('false'"
 RaOrganizationRelation.find(:all,:conditions=>["ra_id = ?",14]).each {|rel| organizations += " OR organization_id = "+  rel.organization_id.to_s}
