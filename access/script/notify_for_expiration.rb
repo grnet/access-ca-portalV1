@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require "config/environment"
+require "./config/environment"
 include X509Certificate
 expire_in_next_month = []
 expire_in_next_week = []
