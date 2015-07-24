@@ -34,12 +34,6 @@ class Person < ActiveRecord::Base
                         :message => :too_long
  validates_uniqueness_of  :email,
                           :message => :email_taken
-  validates_length_of   :work_phone,
-                        :is => 10,
-                        :message => :work_phone_too_long
-  validates_format_of   :work_phone,
-                        :with => /^2\d+/,
-                        :message => :work_phone_invalid
   validates_numericality_of :work_phone,
                             :message => :work_phone_other_than
   validates_as_email    :email,
