@@ -2,7 +2,7 @@
 require 'tmpdir'
 
 ENV['RAILS_ENV'] = 'production'
-require "/var/www/access.hellasgrid.gr/current/config/environment"
+require "./config/environment"
 include X509Certificate
 
 Person.find(:all).each do |p|
