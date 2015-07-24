@@ -14,12 +14,8 @@ class AccountController < ApplicationController
   
   def edit_personal_information
     @action_title = "#{I18n.t "controllers.account.update_personal_details"}"
-    if params[:locale] == "el"
-      @organizations = Organization.find(:all,:order => "name_el ASC").map {|o| [truncate(o.name_el, 40), o.id]}
-    else
-      @organizations = Organization.find(:all,:order => "name_en ASC").map {|o| [truncate(o.name_en, 40) || truncate(o.name_el, 40), o.id]}
-    end
-    @scientific_fields = ScientificField.find(:all).map {|o| [truncate(o.description, 40), o.id]}
+    @organizations = Organization.find(:all,:order => "name_#{params[:locale]} ASC").map {|o| [truncate(o.send("name_#{params[:locale]}"), 40), o.id]}
+    @scientific_fields = ScientificField.find(:all).map {|o| [truncate(o.send("description_#{params[:locale]}"), 40), o.id]}
     @person = Person.find_by_dn(session[:usercert])
   end
   
@@ -46,12 +42,8 @@ class AccountController < ApplicationController
       # render (:text => "<pre>" + email.encoded + "</pre>")
       # redirect_to :action => "csr_form"
     else
-     if params[:locale] == "el"
-      @organizations = Organization.find(:all,:order => "name_el ASC").map {|o| [truncate(o.name_el, 40), o.id]}
-    else
-      @organizations = Organization.find(:all,:order => "name_en ASC").map {|o| [truncate(o.name_en, 40) || truncate(o.name_el, 40), o.id]}
-    end
-      @scientific_fields = ScientificField.find(:all).map {|o| [truncate(o.description, 40), o.id]}
+      @organizations = Organization.find(:all,:order => "name_#{params[:locale]} ASC").map {|o| [truncate(o.send("name_#{params[:locale]}"), 40), o.id]}
+      @scientific_fields = ScientificField.find(:all).map {|o| [truncate(o.send("description_#{params[:locale]}"), 40), o.id]}
       render :action => "edit_personal_information"
     end
   end
