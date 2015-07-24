@@ -9,6 +9,16 @@
 <% if params[:action] == "iexplorer_vista_csr" %>
 <%= javascript_include_tag 'ieVistaCSR.vbs' %>
 <% end %>
+
+<% if params[:controller] == 'register' && (params[:action] == 'registration_form' || params[:action] == 'add_new_person')    %>
+  <%= javascript_include_tag 'libphonenumbers.js'%>
+
+  <% if params[:action] == 'add_new_person' %>
+    <body onload="phoneNumberParser()">
+  <% end %>
+
+<%end%>
+
 <!--[if lt IE 7.]>
 <script defer type="text/javascript" src="/javascripts/pngfix.js"></script>
 <![endif]-->
