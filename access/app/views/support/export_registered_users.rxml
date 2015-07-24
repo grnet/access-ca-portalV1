@@ -82,7 +82,7 @@ xml.Workbook({
             xml.Data person.position, 'ss:Type' => 'String'
           end
           xml.Cell do
-            xml.Data person.organization.name_el , 'ss:Type' => 'String'
+            xml.Data person.organization.send("name_#{params[:locale]}"), 'ss:Type' => 'String'
           end
           xml.Cell do
             xml.Data person.department , 'ss:Type' => 'String'
@@ -95,7 +95,7 @@ xml.Workbook({
           end
           xml.Cell do
             if person.scientific_field
-              xml.Data person.scientific_field.description , 'ss:Type' => 'String'
+              xml.Data person.scientific_field.send("description_#{params[:locale]}") , 'ss:Type' => 'String'
             else
               xml.Data "" , 'ss:Type' => 'String'
             end            
